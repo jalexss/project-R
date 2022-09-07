@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 
-import { CardReceta } from "../components"
+import { RecetaCard } from "../components"
 import { RecetaLayout } from "../layout/RecetaLayout";
 import { recetas } from "../../helpers/recetaTest";
 import { RecetaFilters } from "../components/filter"
@@ -23,7 +23,7 @@ export const RecetaList = () => {
       >    
         {
           recetas.map( receta => (
-            <CardReceta  key={ receta.id }  receta = { receta }  /> 
+            <RecetaCard  key={ receta.id }  receta = { receta }  /> 
           ))
         }
       </Grid>

@@ -1,4 +1,5 @@
 import avatarGirl from '../localstorage/avatarGirl.png'
+import imgNotAvailable from '../localstorage/imgNotAvailable.jpg';
 
 export const recetas = [
   {
@@ -11,11 +12,12 @@ export const recetas = [
     },
     title: 'Receta 100% natural! pruebalo! se que te encantara tal delicia! asdasd',
     images: [
-      '', 
-      '', 
-      '', 
-      '', 
-      '',
+      { title: 'imgNotAvailable', src: imgNotAvailable },
+      { title: 'avatarGirl', src: avatarGirl },
+      { title: 'imgNotAvailable', src: imgNotAvailable },
+      { title: 'avatarGirl', src: avatarGirl },
+      { title: 'imgNotAvailable', src: imgNotAvailable },
+      { title: 'avatarGirl', src: avatarGirl },
     ], //'https://www.recetaslamasia.es/wp-content/uploads/2012/10/foto_plato-equilibrado-705x705.jpg',
     date: 'March 25, 2022',
     ingredients: [
@@ -44,7 +46,7 @@ export const recetas = [
       avatar: ''
     },
     title: 'Receta2 amazing!',
-    images: [''],
+    //images: [{title: '', src: ''}],
     date: '18 de agosto 2022',
     ingredients: ['320g de spaguetti', '2 cucharadas de sal'],
     stars: 325,
@@ -62,7 +64,11 @@ export const recetas = [
       avatar: '',
     },
     title: 'Receta6 omg!',
-    images: [''], //'https://www.recetaslamasia.es/wp-content/uploads/2012/10/foto_plato-equilibrado-705x705.jpg',
+    images: [
+      { title: 'imgNotAvailable', src: imgNotAvailable },
+      { title: 'imgNotAvailable', src: imgNotAvailable },
+      { title: 'imgNotAvailable', src: imgNotAvailable },
+    ], //'https://www.recetaslamasia.es/wp-content/uploads/2012/10/foto_plato-equilibrado-705x705.jpg',
     date: '25 de marzo 2022',
     ingredients: ['chicken', 'rice', 'onion'],
     stars: 325,
@@ -80,7 +86,9 @@ export const recetas = [
         avatar: '',
       },
       title: 'Receta3 amazing!',
-      images: [''],
+      images: [
+        { title: 'imgNotAvailable', src: imgNotAvailable },
+      ],
       date: '18 de agosto 2022',
       ingredients: ['spaguetti', 'salt', 'meat'],
       stars: 325,
@@ -98,7 +106,10 @@ export const recetas = [
         avatar: '',
       },
       title: 'Receta4 amazing!',
-      images: [''],
+      images: [
+        { title: 'imgNotAvailable', src: imgNotAvailable },
+        { title: 'imgNotAvailable', src: imgNotAvailable },
+      ],
       date: '18 de agosto 2022',
       ingredients: ['spaguetti', 'salt', 'meat'],
       stars: 325,

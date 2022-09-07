@@ -8,6 +8,7 @@ export const RecetaInformation = ({ ingredients, description, instruction }) => 
     <Stack
       direction={{ lg:"row", sm:'column' }}
       justifyContent={{lg:"space-between", sm:"center"}}
+      sx={{ mb: 1 }}
     >
       <RecetaIngredients ingredients={ingredients} />
     

@@ -1,6 +1,6 @@
-import { useMemo, /* useState */ } from "react";
+import { useMemo } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { Divider, Grid, Stack } from "@mui/material"
+import { Grid } from "@mui/material"
 import { grey } from "@mui/material/colors";
 
 import { RecetaLayout } from "../layout/RecetaLayout"
@@ -18,10 +18,9 @@ import {
 export const RecetaPage = () => {
 
   const {id : recetaId } = useParams();
-  //console.log(id)
 
   const receta = useMemo(()=> getRecetaById(recetaId), [ recetaId ]); //se disparara cuando el id cambie
-  //console.log(receta.title.length);
+
 
   const {
     date,
@@ -39,9 +38,6 @@ export const RecetaPage = () => {
   if(!receta) {
     return <Navigate to="/" />
   }
-
-  //const [starsRate, setStarsRate] = useState(stars);
-  //const onChangeRate = TODO///
 
   return (
     <RecetaLayout>
@@ -79,8 +75,10 @@ export const RecetaPage = () => {
           ingredients={ingredients}  
         />
 
-        <RecetaMedia images={images} />
-
+        {
+          images && <RecetaMedia images={images} />
+        }
+      
         <RecetaQualification />
 
         <RecetaComments />

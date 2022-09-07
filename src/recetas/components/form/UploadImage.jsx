@@ -18,7 +18,7 @@ export const UploadImage = ({ register, setValue }) => {
 
     if (e.target.files.length === 0 ) return;
 
-    if (e.target.files.length > 5) return setSelectedFile(undefined);
+    if (e.target.files.length > 6) return setSelectedFile(undefined);
     
     setValue('images', e.target.files) // React Hook Form
     setSelectedFile(e.target.files) // Preview image data
@@ -27,7 +27,7 @@ export const UploadImage = ({ register, setValue }) => {
     <FormLayout>
       <Grid sx={{ mt: 2, overflow: 'auto' }} >
         <Typography variant="subtitle2" color={ grey[600] } sx={{ mb: 1 }} >
-          {`Choose a maximum 5 image from your receta. (Optional)`} 
+          {`Choose a maximum 6 image from your receta. (Optional)`} 
         </Typography>
 
         <Button 

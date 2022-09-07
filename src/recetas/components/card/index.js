@@ -1,2 +1,4 @@
-
-export * from './CardReceta';
+//
+//
+//
+export * from './RecetaCard';

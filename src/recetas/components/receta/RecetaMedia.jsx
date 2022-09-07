@@ -1,28 +1,26 @@
-import { Grid, ImageList, ImageListItem, Typography } from "@mui/material"
-import { red } from "@mui/material/colors";
-
-import imgNotAvailable from '../../../localstorage/imgNotAvailable.jpg';
-
+import { Grid } from "@mui/material"
+import { RecetaMediaImages } from "../imageList";
 
 export const RecetaMedia = ({ images }) => {
+
+  console.log(images)
   return (
-    <Grid 
+    <Grid
+      container
+      width={{xs:'100%', lg: '70%'}}
+      justifyContent="center"
+      alignItems="center" 
       sx={{ 
-        backgroundColor: red[100],
-        display: 'flex', 
+        border: 1,
+        borderRadius: '10px',
+        borderColor: 'secondary.main',
+        backgroundColor: 'primary.light',
+        boxShadow: 2,
+        px: 2,
+        my: 2,
       }}
     >
-      <ImageList sx={{ width: 700, height: 500 }} cols={3} rowHeight={259} >
-      {images.map((image, index) => { return (
-        <ImageListItem key={index}>
-          <img
-            src={image.length < 1 ? imgNotAvailable : image }
-            alt={image}
-            loading="lazy"
-          />
-        </ImageListItem>
-      )})}
-      </ImageList>
+      <RecetaMediaImages images={images} />
     </Grid>
   )
 }

@@ -25,6 +25,7 @@ export const theme = createTheme({
     },
     titleRecetaCard: {
       fontSize: '1.25rem',
+      lineHeight: 1.1,
     },
     ingredient: {
       //color: '#D64B36',

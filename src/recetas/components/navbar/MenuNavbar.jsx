@@ -2,8 +2,13 @@ import { useState } from "react";
 
 import { Grid, Menu, MenuItem, IconButton } from "@mui/material";
 import AccountCircle from '@mui/icons-material/AccountCircle';
-    
+import { recetas } from "../../../helpers/recetaTest";
+
+
 export const MenuNavbar = () => {
+    //TODO
+    //perfil -> receta -> usuario -> nami - avatar
+    //const avatarNami = recetas[0].user.avatar;
 
     const [anchorEl, setAnchorEl] = useState(false);
 
