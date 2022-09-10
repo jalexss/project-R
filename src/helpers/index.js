@@ -1,4 +1,4 @@
 
 export * from './AuthValidations'
 export * from './RecetaValidations'
-export * from './getRecetaById'
+export * from './getReceta'

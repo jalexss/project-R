@@ -1,5 +1,5 @@
-import avatarGirl from '../localstorage/avatarGirl.png'
-import imgNotAvailable from '../localstorage/imgNotAvailable.jpg';
+import avatarGirl from '../assets/img/avatarGirl.png'
+import imgNotAvailable from '../assets/img/imgNotAvailable.jpg';
 
 export const recetas = [
   {
@@ -12,12 +12,12 @@ export const recetas = [
     },
     title: 'Receta 100% natural! pruebalo! se que te encantara tal delicia! asdasd',
     images: [
-      { title: 'imgNotAvailable', src: imgNotAvailable },
       { title: 'avatarGirl', src: avatarGirl },
       { title: 'imgNotAvailable', src: imgNotAvailable },
       { title: 'avatarGirl', src: avatarGirl },
       { title: 'imgNotAvailable', src: imgNotAvailable },
       { title: 'avatarGirl', src: avatarGirl },
+      { title: 'imgNotAvailable', src: imgNotAvailable },
     ], //'https://www.recetaslamasia.es/wp-content/uploads/2012/10/foto_plato-equilibrado-705x705.jpg',
     date: 'March 25, 2022',
     ingredients: [
