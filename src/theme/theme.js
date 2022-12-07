@@ -3,34 +3,35 @@ import { red } from "@mui/material/colors";
 
 export const theme = createTheme({
   palette: {
+    mode: "light",
     primary: {
-        main: '#6AF763'
+      main: "#9c27b0",
     },
     secondary: {
-        main: '#D426BD'
+      main: "#D426BD",
     },
     error: {
-        main: red.A400
-    }
+      main: red.A400,
+    },
   },
   typography: {
     customCursive: {
-      fontFamily: 'Shadows Into Light',
+      fontFamily: "Shadows Into Light",
     },
     titleReceta: {
-      color: '#D426BD',
-      fontFamily: 'Shadows Into Light',
-      fontSize: '3rem',
+      color: "#D426BD",
+      fontFamily: "Shadows Into Light",
+      fontSize: "3rem",
       lineHeight: 1.1,
     },
     titleRecetaCard: {
-      fontSize: '1.25rem',
+      fontSize: "1.25rem",
       lineHeight: 1.1,
     },
     ingredient: {
       //color: '#D64B36',
-      fontFamily: 'Dancing Script',
-      fontSize: '1.75rem',
-    }
-  }
-})
+      fontFamily: "Dancing Script",
+      fontSize: "1.75rem",
+    },
+  },
+});

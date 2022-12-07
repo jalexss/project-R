@@ -1,5 +1,5 @@
-import { CardMedia } from "@mui/material"
-
+import { CardMedia } from "@mui/material";
+import imgTemp from "../../../../assets/img/imgNotAvailable.jpg";
 
 export const RecetaMedia = ({ images, user }) => {
   return (
@@ -7,10 +7,9 @@ export const RecetaMedia = ({ images, user }) => {
       <CardMedia
         component="img"
         height="194"
-        image={ images[0].src }
+        image={images[0]}
         alt={user.username}
       />
     </>
-  )
-}
-
+  );
+};
