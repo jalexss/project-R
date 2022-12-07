@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { projectRApi } from "../api";
-import { onLoadRecetas } from "../store";
+import { onLoadRecetas, onSetActiveReceta } from "../store";
 
 export const useRecetaStore = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,20 @@ export const useRecetaStore = () => {
     }
   };
 
+  const startFindRecetaById = async (recetaId) => {
+    try {
+      const { data } = await projectRApi.get(`/recetas/${recetaId}`);
+      dispatch(onSetActiveReceta(data.receta));
+      return data.receta;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const setActiveReceta = ( calendarEvent ) => {
+  //   dispatch( onSetActiveReceta( calendarEvent ) )
+  // }
+
   return {
     //property
     activeReceta,
@@ -24,5 +38,6 @@ export const useRecetaStore = () => {
 
     //methods
     startLoadingRecetas,
+    startFindRecetaById,
   };
 };

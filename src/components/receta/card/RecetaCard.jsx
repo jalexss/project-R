@@ -8,9 +8,7 @@ import {
 } from "./receta";
 
 export const RecetaCard = ({ receta }) => {
-  console.log("la receta aqui", receta);
-  const { id, description, images, title, usuario } = receta;
-  console.log(usuario);
+  const { _id, description, images, title, usuario } = receta;
 
   return (
     <Grid item sx={{ mb: 2 }}>
@@ -25,7 +23,7 @@ export const RecetaCard = ({ receta }) => {
           </>
         )}
 
-        <RecetaContent description={description} id={id} user={usuario} />
+        <RecetaContent description={description} _id={_id} />
 
         <Divider variant="middle" />
 

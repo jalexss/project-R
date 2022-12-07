@@ -14,7 +14,6 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 
 export const MenuNavbar = () => {
   const { user, startLogout } = useAuthStore();
-  console.log(user);
 
   const [anchorEl, setAnchorEl] = useState(false);
 

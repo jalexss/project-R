@@ -34,14 +34,6 @@ export const recetaSlice = createSlice({
     onLoadRecetas: (state, { payload = [] }) => {
       state.isLoadingRecetas = false;
       state.recetas = payload;
-      // payload.forEach((recetas) => {
-      //   const exists = state.recetas.some(
-      //     (dbReceta) => dbReceta.id === recetas.id
-      //   );
-      //   if (!exists) {
-      //     state.recetas.push(recetas);
-      //   }
-      // });
     },
     // onLogoutCalendar: ( state ) => {
     //     state.isLoadingRecetas = true,
@@ -57,6 +49,6 @@ export const {
   // onDeleteReceta,
   onLoadRecetas,
   // onLogoutCalendar,
-  //onSetActiveReceta,
+  onSetActiveReceta,
   // onUpdateReceta,
 } = recetaSlice.actions;

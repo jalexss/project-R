@@ -82,8 +82,9 @@ export const useAuthStore = () => {
 
   const checkAuthToken = async () => {
     const token = localStorage.getItem("token");
+    console.log("TOKEN EN CHECKAUTHTOKEN", token);
 
-    if (!token) return dispatch(onLogout());
+    if (token === null) return dispatch(onLogout());
 
     try {
       const { data } = await projectRApi.get("/auth/renew");

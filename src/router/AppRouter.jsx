@@ -44,7 +44,7 @@ export const AppRouter = () => {
         }
       />
       <Route
-        path="/user/:username/receta/:recetaId"
+        path="/receta/:recetaId"
         element={
           <CheckingAuth status={status}>
             <RecetaPage />
