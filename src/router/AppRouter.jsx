@@ -13,6 +13,7 @@ import {
 } from "../pages";
 import { useAuthStore } from "../hooks";
 import { useEffect } from "react";
+import { RecetaLayout } from "../layouts";
 
 export const AppRouter = () => {
   const { checkAuthToken, status, user } = useAuthStore();
@@ -21,8 +22,16 @@ export const AppRouter = () => {
     checkAuthToken();
   }, []);
 
-  if (status === "checking") return <h1>Loading...</h1>; //TODO Crear loading personalizado
+  //TODO Crear loading personalizado
+  if (status === "checking") {
+    return (
+      <RecetaLayout>
+        <h1>Loading...</h1>
+      </RecetaLayout>
+    );
+  }
 
+  //const tempStatus2 = "authenticated";
   return (
     <Routes>
       {/* ---- privated routes ---- */}
@@ -61,14 +70,7 @@ export const AppRouter = () => {
         }
       />
 
-      <Route
-        path="/auth/confirmEmail"
-        element={
-          <CheckingAuth status={status} userStatus={user.status}>
-            <ConfirmEmailPage />
-          </CheckingAuth>
-        }
-      />
+      <Route path="/auth/confirmEmail" element={<ConfirmEmailPage />} />
 
       {/* public routes */}
       <Route path="/auth/login" element={<LoginPage />} />

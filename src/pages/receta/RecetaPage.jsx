@@ -1,5 +1,5 @@
-import { useMemo, useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useMemo, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
@@ -13,76 +13,80 @@ import {
   RecetaQualification,
   RecetaTitle,
 } from "../../components";
-import { useRecetaStore } from "../../hooks";
+import { projectRApi } from "../../api";
 
 export const RecetaPage = () => {
   const { recetaId } = useParams();
-  const { activeReceta, startFindRecetaById } = useRecetaStore();
-
-  const receta = activeReceta;
+  const [isLoadingReceta, setIsLoadingReceta] = useState(true);
+  const [receta, setReceta] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    startFindRecetaById(recetaId);
-  }, []);
+    //startFindRecetaById(recetaId);
+    let ignore = false;
 
-  if (!receta) {
-    //TODO CAMBIAR POR ISLOADING
-    return <Navigate to="/" />;
-  }
-  console.log("receta here ->", receta);
-  const {
-    createdAt,
-    description,
-    images,
-    ingredients,
-    instruction,
-    updatedAt,
-    minutes,
-    title,
-    stars = 30,
-    usuario,
-  } = receta;
+    projectRApi
+      .get(`/recetas/${recetaId}`)
+      .then(({ data: { receta } }) => {
+        if (ignore) {
+          return;
+        }
+
+        setReceta(receta);
+        setIsLoadingReceta(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        //TODO CAMBIAR POR 404 COMPONENT sin replace
+        navigate("/", { replace: true });
+      });
+
+    return () => (ignore = true);
+  }, [recetaId]);
 
   return (
     <RecetaLayout>
       <BackToHomeButton />
 
-      <Grid
-        alignItems="center"
-        flexDirection="column"
-        sx={{
-          display: "flex",
-          my: 1,
-          py: 1,
-          px: 2,
-          backgroundColor: grey[50],
-          borderRadius: "5px",
-          boxShadow: 1,
-        }}
-      >
-        <RecetaTitle title={title} />
+      {isLoadingReceta && <h3>cargando...</h3>}
 
-        <RecetaDetails
-          username={usuario.username}
-          avatar={usuario.avatar}
-          time={minutes}
-          lastUpdated={updatedAt}
-          stars={stars}
-          date={createdAt}
-        />
+      {!isLoadingReceta && (
+        <Grid
+          alignItems="center"
+          flexDirection="column"
+          sx={{
+            display: "flex",
+            my: 1,
+            py: 1,
+            px: 2,
+            backgroundColor: grey[50],
+            borderRadius: "5px",
+            boxShadow: 1,
+          }}
+        >
+          <RecetaTitle title={receta.title} />
 
-        <RecetaInformation
-          description={description}
-          instruction={instruction}
-          ingredients={ingredients}
-        />
+          <RecetaDetails
+            usuario={receta.usuario}
+            minutes={receta.minutes}
+            updatedAt={receta.updatedAt}
+            stars={receta.stars}
+            createdAt={receta.createdAt}
+          />
 
-        {images > 0 && <RecetaMedia images={images} />}
+          <RecetaInformation
+            description={receta.description}
+            instruction={receta.instruction}
+            ingredients={receta.ingredients}
+          />
 
-        <RecetaQualification />
+          {receta.images?.length > 0 && <RecetaMedia images={receta.images} />}
 
-        <RecetaComments />
-      </Grid>
+          <RecetaQualification />
+
+          <RecetaComments />
+        </Grid>
+      )}
     </RecetaLayout>
   );
 };

@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice, recetaSlice } from "./";
+import { authSlice } from "./";
+import { authApi } from "./api/authApi";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-    recetas: recetaSlice.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(authApi.middleware),
 });

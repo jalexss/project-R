@@ -1,8 +1,10 @@
 import { Link as RouterLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { Grid, TextField, Button, Link, Alert } from "@mui/material";
 
+import { useLoginMutation } from "../../store/api/authApi";
 import { AuthLayout } from "../../layouts";
 import { useAuthStore } from "../../hooks";
 import {
@@ -10,8 +12,19 @@ import {
   usernameLoginValidations,
 } from "../../helpers/AuthValidations";
 
+const helperTextMain = {
+  username: "Enter a username",
+  password: "Enter a password",
+};
+
 export const LoginPage = () => {
-  const { startLogin, errorMessage } = useAuthStore();
+  const { startLogin, isLoading, isError, error } = useAuthStore();
+  //const dispatch = useDispatch();
+  //const { status, user } = useSelector((state) => state.auth);
+  // const [login, { isLoading, isError, error, data: userLogged }] =
+  //   useLoginMutation();
+
+  //console.log("fuera de submit", userLogged);
 
   const {
     register,
@@ -19,13 +32,12 @@ export const LoginPage = () => {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  const helperTextMain = {
-    username: "Enter a username",
-    password: "Enter a password",
-  };
-
   const onSubmit = (data) => {
     startLogin(data);
+    // login(data)
+    //   .unwrap()
+    //   .then((fulfilled) => console.log(fulfilled))
+    //   .catch((rejected) => console.error(rejected));
   };
 
   return (
@@ -44,7 +56,7 @@ export const LoginPage = () => {
                   ? errors.username.message
                   : helperTextMain.username
               }
-              error={!!errors?.username || !!errorMessage}
+              error={!!errors?.username || !!error}
               {...register("username", usernameLoginValidations)}
             />
           </Grid>
@@ -69,14 +81,19 @@ export const LoginPage = () => {
 
         <Alert
           severity="error"
-          sx={{ mt: 1, display: !!errorMessage ? "flex" : "none" }}
+          sx={{ mt: 1, display: isError ? "flex" : "none" }}
         >
-          {errorMessage}
+          {error?.data.msg}
         </Alert>
 
         <Grid container spacing={1} sx={{ mb: 2, mt: 1 }}>
           <Grid item sm={12}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              variant="contained"
+              fullWidth
+            >
               Login
             </Button>
           </Grid>
