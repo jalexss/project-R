@@ -14,13 +14,9 @@ import {
 import { useAuthStore } from "../hooks";
 import { useEffect } from "react";
 import { RecetaLayout } from "../layouts";
-import { useGetDataUserMutation } from "../store/api/authApi";
 
 export const AppRouter = () => {
   const { checkAuthToken, status, user, onLoadUser } = useAuthStore();
-  const [getDataUser, result] = useGetDataUserMutation();
-
-  console.log(result);
 
   useEffect(() => {
     let ignore = false;
@@ -30,7 +26,6 @@ export const AppRouter = () => {
     checkAuthToken();
 
     if (status === "authenticated" && !user) {
-      getDataUser();
       onLoadUser();
     }
 

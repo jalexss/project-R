@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  useGetDataUserQuery,
   useLoginMutation,
   useRegisterMutation,
+  useGetDataUserMutation,
 } from "../store/api/authApi";
-import { projectRApi } from "../api";
+
 import {
   onChecking,
   onLogin,
@@ -20,10 +20,7 @@ export const useAuthStore = () => {
   const { status, user } = useSelector((state) => state.auth);
   const [login, loginResult] = useLoginMutation();
   const [register, registerResult] = useRegisterMutation();
-  // const dataUser = useGetDataUserQuery();
-  // console.log(dataUser);
-
-  //TODO: useState de isLoading
+  const [getDataUser] = useGetDataUserMutation();
 
   const startLogin = async (data) => {
     login(data)
@@ -72,22 +69,12 @@ export const useAuthStore = () => {
   };
 
   const onLoadUser = async () => {
-    try {
-      const { data } = await projectRApi.get("/auth/user");
-      dispatch(
-        loadedUser({
-          email: data.email,
-          avatar: data.avatar,
-          id: data.id,
-          role: data.role,
-          status: data.status,
-          username: data.username,
-        })
-      );
-    } catch (error) {
-      console.log(error);
-      dispatch(loadedUser("Error fetching user"));
-    }
+    getDataUser()
+      .unwrap()
+      .then((fulfilled) => {
+        dispatch(loadedUser(fulfilled));
+      })
+      .catch(() => dispatch(loadedUser(null)));
   };
 
   const startLogout = () => {
