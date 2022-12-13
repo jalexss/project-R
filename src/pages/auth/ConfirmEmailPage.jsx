@@ -9,7 +9,7 @@ export const ConfirmEmailPage = () => {
   const navigate = useNavigate();
   const { user } = useAuthStore();
 
-  if (user.status === "active") {
+  if (user?.status === "active") {
     return navigate("/", { replace: true });
   }
 

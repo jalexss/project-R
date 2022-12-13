@@ -1,7 +1,14 @@
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { Grid, TextField, Button, Link, Alert } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Link,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
 
 import { AuthLayout } from "../../layouts";
 import {
@@ -12,7 +19,8 @@ import {
 import { useAuthStore } from "../../hooks";
 
 export const RegisterPage = () => {
-  const { startRegister, errorMessage } = useAuthStore();
+  const { startRegister, registerResult } = useAuthStore();
+  const { isLoading, isError, error } = registerResult;
 
   const {
     register,
@@ -53,7 +61,7 @@ export const RegisterPage = () => {
                   ? errors.username.message
                   : helperTextMain.username
               }
-              error={!!errors?.username}
+              error={!!errors?.username || isError}
               {...register("username", usernameValidations)}
             />
           </Grid>
@@ -67,7 +75,7 @@ export const RegisterPage = () => {
               helperText={
                 !!errors?.email ? errors.email.message : helperTextMain.email
               }
-              error={!!errors?.email}
+              error={!!errors?.email || isError}
               {...register("email", emailValidations)}
             />
           </Grid>
@@ -83,7 +91,7 @@ export const RegisterPage = () => {
                   ? errors.password.message
                   : helperTextMain.password
               }
-              error={!!errors?.password}
+              error={!!errors?.password || isError}
               {...register("password", passwordValidations)}
             />
           </Grid>
@@ -99,7 +107,7 @@ export const RegisterPage = () => {
                   ? errors.confirmPassword.message
                   : helperTextMain.confirmPassword
               }
-              error={!!errors?.confirmPassword}
+              error={!!errors?.confirmPassword || isError}
               {...register("confirmPassword", confirmPasswordValidations)}
             />
           </Grid>
@@ -107,17 +115,32 @@ export const RegisterPage = () => {
 
         <Alert
           severity="error"
-          sx={{ mt: 1, display: !!errorMessage ? "flex" : "none" }}
+          sx={{ mt: 1, display: isError ? "flex" : "none" }}
         >
-          {errorMessage}
+          {error?.data.msg}
         </Alert>
 
-        <Grid container spacing={1} sx={{ mb: 2, mt: 1 }}>
-          <Grid item sm={12}>
-            <Button type="submit" variant="contained" fullWidth>
-              Login
-            </Button>
-          </Grid>
+        <Grid container sx={{ mb: 2, mt: 1, position: "relative" }}>
+          <Button
+            type="submit"
+            disabled={isLoading}
+            variant="contained"
+            fullWidth
+          >
+            Create Account
+          </Button>
+          {isLoading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                marginTop: "-12px",
+                marginLeft: "-12px",
+              }}
+            />
+          )}
         </Grid>
 
         <Grid

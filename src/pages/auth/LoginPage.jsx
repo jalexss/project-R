@@ -1,10 +1,15 @@
 import { Link as RouterLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
-import { Grid, TextField, Button, Link, Alert } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  Link,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
 
-import { useLoginMutation } from "../../store/api/authApi";
 import { AuthLayout } from "../../layouts";
 import { useAuthStore } from "../../hooks";
 import {
@@ -18,13 +23,8 @@ const helperTextMain = {
 };
 
 export const LoginPage = () => {
-  const { startLogin, isLoading, isError, error } = useAuthStore();
-  //const dispatch = useDispatch();
-  //const { status, user } = useSelector((state) => state.auth);
-  // const [login, { isLoading, isError, error, data: userLogged }] =
-  //   useLoginMutation();
-
-  //console.log("fuera de submit", userLogged);
+  const { startLogin, loginResult } = useAuthStore();
+  const { isLoading, isError, error } = loginResult;
 
   const {
     register,
@@ -34,10 +34,6 @@ export const LoginPage = () => {
 
   const onSubmit = (data) => {
     startLogin(data);
-    // login(data)
-    //   .unwrap()
-    //   .then((fulfilled) => console.log(fulfilled))
-    //   .catch((rejected) => console.error(rejected));
   };
 
   return (
@@ -73,7 +69,7 @@ export const LoginPage = () => {
                   ? errors.password.message
                   : helperTextMain.password
               }
-              error={!!errors?.password}
+              error={!!errors?.password || !!error}
               {...register("password", passwordLoginValidations)}
             />
           </Grid>
@@ -86,17 +82,27 @@ export const LoginPage = () => {
           {error?.data.msg}
         </Alert>
 
-        <Grid container spacing={1} sx={{ mb: 2, mt: 1 }}>
-          <Grid item sm={12}>
-            <Button
-              type="submit"
-              disabled={isLoading}
-              variant="contained"
-              fullWidth
-            >
-              Login
-            </Button>
-          </Grid>
+        <Grid container sx={{ mb: 2, mt: 1, position: "relative" }}>
+          <Button
+            type="submit"
+            disabled={isLoading}
+            variant="contained"
+            fullWidth
+          >
+            Login
+          </Button>
+          {isLoading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                marginTop: "-12px",
+                marginLeft: "-12px",
+              }}
+            />
+          )}
         </Grid>
 
         <Grid

@@ -4,41 +4,36 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     status: "checking", // 'authenticated, 'not-authenticated'
-    user: {},
+    user: null,
     token: null,
   },
   reducers: {
     onChecking: (state) => {
       state.status = "checking";
-      state.user = {};
-      state.errorMessage = undefined;
+      state.user = null;
+      state.token = null;
     },
     onLogin: (state, { payload }) => {
       state.status = "authenticated";
-      state.user = payload;
-      state.errorMessage = undefined;
+      state.user = payload.user;
       state.token = payload.token;
     },
-    onLogout: (state, { payload }) => {
+    onLogout: (state) => {
       state.status = "not-authenticated";
-      state.user = {};
-      state.errorMessage = payload;
+      state.user = null;
       state.token = null;
     },
-    clearErrorMessage: (state) => {
-      state.errorMessage = undefined;
-    },
-    authethicated: (state, { payload }) => {
-      state.status = "authenthicated";
+    authenticated: (state, { payload }) => {
+      state.status = "authenticated";
       state.token = payload;
+    },
+
+    loadedUser: (state, { payload }) => {
+      state.status = "authenticated";
+      state.user = payload;
     },
   },
 });
 
-export const {
-  onChecking,
-  onLogin,
-  onLogout,
-  clearErrorMessage,
-  authethicated,
-} = authSlice.actions;
+export const { loadedUser, onChecking, onLogin, onLogout, authenticated } =
+  authSlice.actions;

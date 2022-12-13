@@ -34,7 +34,10 @@ export const MenuNavbar = () => {
         spacing={1}
       >
         <IconButton size="large" onClick={onMenu}>
-          <Avatar alt={user.username} src={user.avatar} />
+          <Avatar
+            alt={user ? user?.username : ""}
+            src={user ? user?.avatar : ""}
+          />
         </IconButton>
       </Stack>
       <Menu
@@ -50,7 +53,9 @@ export const MenuNavbar = () => {
         open={Boolean(anchorEl)}
         onClose={onClickUserMenu}
       >
-        <MenuItem onClick={onClickUserMenu}>{user.username}</MenuItem>
+        <MenuItem onClick={onClickUserMenu}>
+          {user ? user?.username : ""}
+        </MenuItem>
         <MenuItem onClick={onClickUserMenu}>Dark Mode</MenuItem>
         <MenuItem onClick={startLogout}>Log out</MenuItem>
       </Menu>
