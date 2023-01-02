@@ -1,27 +1,28 @@
-import { Typography } from "@mui/material"
+import { TextField, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { minutesValidation } from "../../../helpers";
 
 import { FormLayout } from "../../../layouts";
-import { MinuteSlicer } from "../slicer";
 
-export const TimeInput = ({ setValue, register }) => {
+const helperTextMain = "Expressed in minutes... max 24 hours.";
 
+export const TimeInput = ({ register, errors }) => {
   return (
     <FormLayout>
-      <Typography variant="subtitle1" color={ grey[700] } >
+      <Typography variant="subtitle1" color={grey[700]} sx={{ mb: 1 }}>
         How much time to prepare this receta?
       </Typography>
 
-      <Typography 
-        variant="subtitle2" 
-        color={ grey[600] }
-        sx={{ fontWeight: 'regular' }} 
-      >
-        Expressed in minutes... max 24 hours.
-      </Typography>
-
-      <MinuteSlicer setValue={setValue} register={register} />
+      <TextField
+        required
+        label="Minutes"
+        type="number"
+        placeholder="how long do you prepare it?"
+        helperText={!!errors?.minutes ? errors.minutes.message : helperTextMain}
+        error={!!errors?.minutes}
+        fullWidth
+        {...register("minutes", minutesValidation)}
+      />
     </FormLayout>
-  )
-}
-
+  );
+};

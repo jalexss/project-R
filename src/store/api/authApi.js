@@ -9,7 +9,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: ({ username, password }) => ({
-        url: "/",
+        url: "/auth/",
         method: "POST",
         body: { username, password },
         timeout: 5000, // tiempo de espera de 5 segundos
@@ -17,7 +17,7 @@ export const authApi = createApi({
     }),
     register: builder.mutation({
       query: ({ email, username, password }) => ({
-        url: "/new",
+        url: "/auth/new",
         method: "POST",
         body: { email, username, password },
         timeout: 5000, // tiempo de espera de 5 segundos
@@ -25,7 +25,7 @@ export const authApi = createApi({
     }),
     getDataUser: builder.mutation({
       query: () => ({
-        url: "/user",
+        url: "/auth/user",
         method: "GET",
       }),
     }),
