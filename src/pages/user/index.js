@@ -1,4 +1,5 @@
 //
 //
 //
-export * from './UserProfilePage'
+export * from "./UserProfilePage";
+export * from "./MyRecetasPage";

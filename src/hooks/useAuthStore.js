@@ -23,6 +23,7 @@ export const useAuthStore = () => {
   const [getDataUser] = useGetDataUserMutation();
 
   const startLogin = async (data) => {
+    //dispatch(onChecking());
     login(data)
       .unwrap()
       .then((fulfilled) => {
@@ -61,6 +62,7 @@ export const useAuthStore = () => {
   };
 
   const checkAuthToken = async () => {
+    // dispatch(onChecking());
     const token = localStorage.getItem("token");
 
     if (token === null) return dispatch(onLogout());
@@ -69,6 +71,7 @@ export const useAuthStore = () => {
   };
 
   const onLoadUser = async () => {
+    //dispatch(onChecking());
     getDataUser()
       .unwrap()
       .then((fulfilled) => {

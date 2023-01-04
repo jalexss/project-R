@@ -5,6 +5,7 @@ import {
   ConfirmEmailPage,
   ForgotPasswordPage,
   LoginPage,
+  MyRecetasPage,
   RecetaFormPage,
   RecetaListPage,
   RecetaPage,
@@ -76,6 +77,14 @@ export const AppRouter = () => {
         element={
           <CheckingAuth status={status}>
             <UserProfilePage />
+          </CheckingAuth>
+        }
+      />
+      <Route
+        path="/myRecetas"
+        element={
+          <CheckingAuth status={status}>
+            <MyRecetasPage />
           </CheckingAuth>
         }
       />

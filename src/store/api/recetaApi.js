@@ -7,11 +7,17 @@ export const recetaApi = createApi({
   baseQuery,
 
   endpoints: (builder) => ({
+    myRecetas: builder.query({
+      query: () => "/recetas/myRecetas",
+    }),
     getRecetas: builder.query({
       query: () => "/recetas/",
     }),
     getRecetaById: builder.query({
       query: (recetaId) => `/recetas/${recetaId}`,
+    }),
+    getRecetasByUserId: builder.query({
+      query: (userId) => `/recetas/user/${userId}`,
     }),
     createReceta: builder.mutation({
       query: ({ description, ingredients, instruction, minutes, title }) => ({
@@ -21,17 +27,13 @@ export const recetaApi = createApi({
         timeout: 5000, // tiempo de espera de 5 segundos
       }),
     }),
-    // getDataUser: builder.mutation({
-    //   query: () => ({
-    //     url: "/user",
-    //     method: "GET",
-    //   }),
-    // }),
   }),
 });
 
 export const {
+  useMyRecetasQuery,
   useGetRecetasQuery,
   useGetRecetaByIdQuery,
+  userGetRecetasByUserId,
   useCreateRecetaMutation,
 } = recetaApi;

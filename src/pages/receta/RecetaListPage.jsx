@@ -10,7 +10,7 @@ export const RecetaListPage = () => {
   if (isError) {
     return (
       <RecetaLayout>
-        <h3>Error: recetas load failed!</h3>
+        <h3>Recetas load failed!</h3>
       </RecetaLayout>
     );
   }

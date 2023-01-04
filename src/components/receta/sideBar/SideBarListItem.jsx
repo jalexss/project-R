@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom";
 import {
   Divider,
   List,
@@ -6,14 +6,13 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-} from '@mui/material'
-import CircleIcon from '@mui/icons-material/Circle';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import StarIcon from '@mui/icons-material/Star';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+} from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import StarIcon from "@mui/icons-material/Star";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 export const SideBarListItem = () => {
-
   //TODO: const SbListItem = ['My recetas', 'My favorites', 'More soon!']
 
   return (
@@ -22,7 +21,7 @@ export const SideBarListItem = () => {
       <List>
         <Divider />
         <ListItem disablePadding>
-          <ListItemButton component={ RouterLink } to="/receta/create" >
+          <ListItemButton component={RouterLink} to="/receta/create">
             <ListItemIcon>
               <AddCircleIcon />
             </ListItemIcon>
@@ -31,7 +30,7 @@ export const SideBarListItem = () => {
         </ListItem>
         <Divider />
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton component={RouterLink} to="/myRecetas">
             <ListItemIcon>
               <StarIcon />
             </ListItemIcon>
@@ -58,7 +57,6 @@ export const SideBarListItem = () => {
         </ListItem>
         <Divider />
       </List>
- 
     </div>
-  )
-}
+  );
+};
